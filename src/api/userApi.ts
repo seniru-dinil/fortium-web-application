@@ -3,6 +3,12 @@ import { API_ENDPOINTS } from "../lib/api.config";
 import LoginRequest from "../model/loginRequest.model";
 import User from "../model/user.model";
 
+export const getUsers = () => api.get<User[]>(API_ENDPOINTS.GET_USER_LIST);
+
+export const updateUser = (
+  email: string,
+  user: Omit<User, "createdAt" | "updatedAt">
+) => api.put(`${API_ENDPOINTS.CREATE_USER}/${email}`, user);
 export const loginUser = (credentials: LoginRequest) =>
   api.post(API_ENDPOINTS.LOGIN, credentials);
 

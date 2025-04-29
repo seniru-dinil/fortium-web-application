@@ -42,6 +42,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("fom sdojfo");
     setError("");
     setLoading(true);
 
@@ -50,9 +51,11 @@ export default function LoginPage() {
         email: username,
         password,
       });
-      const { token, role } = response.data;
+      console.log(response.data);
 
-      if (Array.isArray(role) && role.includes("ROLE_ADMIN")) {
+      const { token, roles } = response.data;
+
+      if (Array.isArray(roles) && roles.includes("ROLE_ADMIN")) {
         localStorage.setItem("token", token);
         navigate("/home");
       } else {
